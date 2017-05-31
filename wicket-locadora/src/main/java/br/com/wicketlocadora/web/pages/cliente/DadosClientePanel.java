@@ -2,6 +2,7 @@ package br.com.wicketlocadora.web.pages.cliente;
 
 import java.util.Arrays;
 
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -28,7 +29,8 @@ public class DadosClientePanel extends Panel {
 	add(new TextField<String>("email"));
 	add(new TextField<String>("logradouro", clienteModel.bind("endereco.logradouro")));
 	add(new TextField<String>("cidade", clienteModel.bind("endereco.cidade")));
-	add(new DropDownChoice<UF>("uf", clienteModel.bind("endereco.uf"), Arrays.asList(UF.values())));
+	add(new DropDownChoice<UF>("uf", clienteModel.bind("endereco.uf"), Arrays.asList(UF.values()),
+		new ChoiceRenderer<UF>("nome", "name")));
 
     }
 

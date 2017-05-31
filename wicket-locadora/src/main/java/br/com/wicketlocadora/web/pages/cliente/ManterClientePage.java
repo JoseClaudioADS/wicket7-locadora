@@ -3,8 +3,11 @@ package br.com.wicketlocadora.web.pages.cliente;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import br.com.wicketlocadora.persistence.domain.Cliente;
+import br.com.wicketlocadora.service.cliente.ClienteService;
+import br.com.wicketlocadora.service.exception.NegocioException;
 import br.com.wicketlocadora.web.pages.template.RaizPage;
 
 public class ManterClientePage extends RaizPage {
@@ -13,6 +16,9 @@ public class ManterClientePage extends RaizPage {
 
     private Cliente cliente;
     private CompoundPropertyModel<Cliente> clienteModel;
+
+    @SpringBean
+    private ClienteService clienteService;
 
     public ManterClientePage() {
 	cliente = new Cliente();
@@ -28,9 +34,14 @@ public class ManterClientePage extends RaizPage {
 	formulario.add(new Button("btnSalvar") {
 	    @Override
 	    public void onSubmit() {
-		System.out.println(cliente);
+		try {
+		    clienteService.manter(cliente);
+		    getSession().success("Cliente cadastrado com sucesso.");
+		    setResponsePage(ClientesPage.class);
+		} catch (NegocioException e) {
+		    lancarErros(e.getErros());
+		}
 	    }
 	});
     }
-
 }
