@@ -8,12 +8,14 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "cli_cliente")
 @AttributeOverride(column = @Column(name = "cli_id"), name = "id")
 @Getter
 @Setter
+@ToString
 public class Cliente extends Entidade {
 
     private static final long serialVersionUID = 166002450591384507L;
