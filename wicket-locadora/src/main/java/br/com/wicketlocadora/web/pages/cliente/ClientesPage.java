@@ -13,6 +13,7 @@ public class ClientesPage extends RaizPage {
     protected void onInitialize() {
 	super.onInitialize();
 	add(new BookmarkablePageLink<Cliente>("linkNovoCliente", ManterClientePage.class));
+	add(new ListaClientesPanel("listaClientePanel"));
     }
 
 }

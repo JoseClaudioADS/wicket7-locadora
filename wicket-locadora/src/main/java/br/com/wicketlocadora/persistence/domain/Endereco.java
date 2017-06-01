@@ -25,4 +25,8 @@ public class Endereco implements Serializable {
     @Enumerated(EnumType.STRING)
     private UF uf;
 
+    public String getEnderecoFormatado() {
+	return this.logradouro + ", " + this.cidade + " - " + this.uf;
+    }
+
 }
