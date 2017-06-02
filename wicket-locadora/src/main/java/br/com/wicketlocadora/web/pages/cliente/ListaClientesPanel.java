@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.markup.repeater.Item;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import br.com.wicketlocadora.persistence.domain.Cliente;
 import br.com.wicketlocadora.persistence.repository.ClienteRepository;
+import br.com.wicketlocadora.web.util.LinkPanel;
 import br.com.wicketlocadora.web.util.ProviderGenerico;
 import br.com.wicketlocadora.web.util.tabela.Coluna;
 import br.com.wicketlocadora.web.util.tabela.Tabela;
@@ -32,6 +37,17 @@ public class ListaClientesPanel extends Panel {
 	colunas.add(new Coluna<Cliente>("Nome", "nome"));
 	colunas.add(new Coluna<Cliente>("E-mail", "email"));
 	colunas.add(new Coluna<Cliente>("Endereço", "endereco.enderecoFormatado"));
+
+	colunas.add(new Coluna<Cliente>("Ações", "") {
+
+	    @Override
+	    public void populateItem(Item<ICellPopulator<Cliente>> cellItem, String componentId,
+		    IModel<Cliente> rowModel) {
+		PageParameters parameters = new PageParameters();
+		parameters.add("id", rowModel.getObject().getId());
+		cellItem.add(new LinkPanel<Cliente>(componentId, "Alterar", ManterClientePage.class, parameters));
+	    }
+	});
 
 	Tabela<Cliente> tabela = new Tabela<Cliente>("dtClientes", colunas, new ClientesProvider(), 20);
 

@@ -10,5 +10,4 @@ public class Coluna<T extends Entidade> extends PropertyColumn<T, String> {
     public Coluna(String cabecalho, String propriedade) {
 	super(new Model<String>(cabecalho), propriedade);
     }
-
 }

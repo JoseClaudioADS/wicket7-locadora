@@ -21,4 +21,8 @@ public class ClienteService {
 	clienteRepository.save(cliente);
     }
 
+    public ClienteRepository getRepository() {
+	return this.clienteRepository;
+    }
+
 }
