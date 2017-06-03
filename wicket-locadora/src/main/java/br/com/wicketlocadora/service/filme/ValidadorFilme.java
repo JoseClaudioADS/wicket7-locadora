@@ -1,8 +1,7 @@
 package br.com.wicketlocadora.service.filme;
 
-import java.util.Set;
+import org.apache.commons.collections4.CollectionUtils;
 
-import br.com.wicketlocadora.persistence.domain.Categoria;
 import br.com.wicketlocadora.persistence.domain.Filme;
 import br.com.wicketlocadora.service.Validador;
 import br.com.wicketlocadora.service.exception.NegocioException;
@@ -20,8 +19,7 @@ public class ValidadorFilme extends Validador {
     }
 
     private void validarCategoria(Filme filme) throws CategoriaNaoInformadaException {
-	Set<Categoria> categorias = filme.getCategorias();
-	if (categorias == null || categorias.isEmpty()) {
+	if (CollectionUtils.isEmpty(filme.getCategorias())) {
 	    throw new CategoriaNaoInformadaException();
 	}
     }

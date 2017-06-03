@@ -9,17 +9,23 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.string.StringValue;
 
 import br.com.wicketlocadora.persistence.domain.Filme;
+import br.com.wicketlocadora.persistence.repository.CategoriaRepository;
 import br.com.wicketlocadora.service.exception.NegocioException;
 import br.com.wicketlocadora.service.exception.filme.FilmeService;
 import br.com.wicketlocadora.web.pages.template.RaizPage;
 
 public class ManterFilmePage extends RaizPage {
 
+    private static final long serialVersionUID = 8059638603209899024L;
+
     private Filme filme;
     private CompoundPropertyModel<Filme> filmeModel;
 
     @SpringBean
     private FilmeService filmeService;
+
+    @SpringBean
+    private CategoriaRepository categoriaRepository;
 
     public ManterFilmePage(PageParameters parameters) {
 	StringValue id = parameters.get("id");
@@ -38,7 +44,8 @@ public class ManterFilmePage extends RaizPage {
 	add(new Label("titulo", cadastrando ? "Novo" : "Alterar"));
 	Form<Filme> formulario = new Form<Filme>("formulario", filmeModel);
 	add(formulario);
-	formulario.add(new DadosFilmePanel("painelDadosFilme", filmeModel));
+	DadosFilmePanel dadosFilmePanel = new DadosFilmePanel("painelDadosFilme");
+	formulario.add(dadosFilmePanel);
 	formulario.add(new Button("btnSalvar") {
 	    @Override
 	    public void onSubmit() {

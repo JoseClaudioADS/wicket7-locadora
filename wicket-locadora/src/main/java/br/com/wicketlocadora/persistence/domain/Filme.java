@@ -1,6 +1,6 @@
 package br.com.wicketlocadora.persistence.domain;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -30,6 +30,6 @@ public class Filme extends Entidade {
 
     @OneToMany
     @JoinTable(joinColumns = @JoinColumn(name = "flm_id"), inverseJoinColumns = @JoinColumn(name = "cat_id"))
-    private Set<Categoria> categorias;
+    private List<Categoria> categorias;
 
 }
