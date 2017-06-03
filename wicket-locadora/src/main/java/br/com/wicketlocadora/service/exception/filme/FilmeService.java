@@ -25,7 +25,8 @@ import br.com.wicketlocadora.service.filme.ValidadorFilme;
 @Service
 public class FilmeService implements IService<Filme> {
 
-    public static final String LOCAL_UPLOAD_CAPAS = "D:" + "\\" + "capas";
+    public static final String NOME_PASTA_CAPAS = "capas";
+    public static final String LOCAL_UPLOAD_CAPAS = "src/main/webapp/" + NOME_PASTA_CAPAS;
 
     @Autowired
     private FilmeRepository repository;
