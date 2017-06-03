@@ -2,6 +2,7 @@ package br.com.wicketlocadora.web.pages.filmes;
 
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.ListMultipleChoice;
+import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -30,7 +31,7 @@ public class DadosFilmePanel extends Panel {
     protected void onInitialize() {
 	super.onInitialize();
 	add(new TextField<String>("titulo"));
-	add(new TextField<String>("descricao"));
+	add(new TextArea<String>("descricao"));
 
 	ListMultipleChoice<Categoria> lmCategorias = new ListMultipleChoice<Categoria>("categorias",
 		categoriaRepository.findAll(new Sort("nome")), new ChoiceRenderer<Categoria>("nome", "id"));

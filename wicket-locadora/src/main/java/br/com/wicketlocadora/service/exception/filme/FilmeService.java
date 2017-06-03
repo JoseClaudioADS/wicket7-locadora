@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,19 @@ public class FilmeService implements IService<Filme> {
 	    e.printStackTrace();
 	}
 	return null;
+    }
+
+    @Transactional(readOnly = true)
+    public Filme buscar(Long id) {
+	Filme filme = repository.findOne(id);
+	// novamente precisamos carregar tudo o que é preciso para a
+	// exibição
+	// do objeto, por este motivo temos que carregar a lista de
+	// categorias
+	// dentro da mesma transação, onde terá uma sessão para efetuar o
+	// trabalho
+	Hibernate.initialize(filme.getCategorias());
+	return filme;
     }
 
     @Override

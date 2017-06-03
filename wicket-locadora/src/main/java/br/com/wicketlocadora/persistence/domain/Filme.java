@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class Filme extends Entidade {
     private String descricao;
     private String capa;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "flm_id"), inverseJoinColumns = @JoinColumn(name = "cat_id"))
     private List<Categoria> categorias;
 

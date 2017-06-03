@@ -33,7 +33,7 @@ public class ManterFilmePage extends RaizPage {
 	if (id.isNull()) {
 	    this.filme = new Filme();
 	} else {
-	    this.filme = filmeService.getRepository().findOne(id.toLongObject());
+	    this.filme = filmeService.buscar(id.toLongObject());
 	}
 	filmeModel = new CompoundPropertyModel<Filme>(filme);
     }
