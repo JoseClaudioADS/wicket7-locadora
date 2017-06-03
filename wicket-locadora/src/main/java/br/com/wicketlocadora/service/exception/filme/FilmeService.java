@@ -1,8 +1,14 @@
 package br.com.wicketlocadora.service.exception.filme;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -19,6 +25,8 @@ import br.com.wicketlocadora.service.filme.ValidadorFilme;
 @Service
 public class FilmeService implements IService<Filme> {
 
+    public static final String LOCAL_UPLOAD_CAPAS = "D:" + "\\" + "capas";
+
     @Autowired
     private FilmeRepository repository;
 
@@ -26,9 +34,10 @@ public class FilmeService implements IService<Filme> {
     private CategoriaRepository categoriaRepository;
 
     @Transactional
-    public void manter(Filme filme) throws NegocioException {
+    public void manter(Filme filme, FileUpload capa) throws NegocioException {
 	ValidadorFilme validador = new ValidadorFilme();
 	validador.validarFilme(filme);
+	validador.validarCapa(capa);
 
 	// o wicket nos traz as categorias de forma transient
 	// a utilização do padrão openSessionInView poderia ajudar, mas...
@@ -39,7 +48,29 @@ public class FilmeService implements IService<Filme> {
 	    categorias.add(categoriaRepository.findOne(categoria.getId()));
 	}
 	filme.setCategorias(categorias);
+	filme.setCapa(uploadCapa(capa));
 	repository.save(filme);
+    }
+
+    private String uploadCapa(FileUpload capa) {
+
+	try {
+	    Path diretorio = Paths.get(LOCAL_UPLOAD_CAPAS);
+	    if (!Files.exists(diretorio)) {
+		Files.createDirectory(diretorio);
+	    }
+
+	    String nomeArquivo = new Date().getTime() + capa.getClientFileName();
+	    Path pathArquivo = Paths.get(LOCAL_UPLOAD_CAPAS + "\\" + nomeArquivo);
+	    Files.createFile(pathArquivo);
+
+	    Files.write(pathArquivo, capa.getBytes());
+
+	    return nomeArquivo;
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	return null;
     }
 
     @Override

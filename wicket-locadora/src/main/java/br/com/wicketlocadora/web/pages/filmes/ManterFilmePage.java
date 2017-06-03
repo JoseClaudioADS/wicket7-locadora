@@ -6,6 +6,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.lang.Bytes;
 import org.apache.wicket.util.string.StringValue;
 
 import br.com.wicketlocadora.persistence.domain.Filme;
@@ -43,6 +44,11 @@ public class ManterFilmePage extends RaizPage {
 	boolean cadastrando = filme.getId() == null;
 	add(new Label("titulo", cadastrando ? "Novo" : "Alterar"));
 	Form<Filme> formulario = new Form<Filme>("formulario", filmeModel);
+	formulario.setMultiPart(true);// sinalizando ao form para ser
+	// MultiPart
+	// e permitir upload de arquivos
+	formulario.setMaxSize(Bytes.kilobytes(100));
+	formulario.setFileMaxSize(Bytes.kilobytes(90));
 	add(formulario);
 	DadosFilmePanel dadosFilmePanel = new DadosFilmePanel("painelDadosFilme");
 	formulario.add(dadosFilmePanel);
@@ -50,7 +56,7 @@ public class ManterFilmePage extends RaizPage {
 	    @Override
 	    public void onSubmit() {
 		try {
-		    filmeService.manter(filme);
+		    filmeService.manter(filme, dadosFilmePanel.getCapa().getFileUpload());
 		    getSession()
 			    .success(String.format("Filme %s com sucesso.", cadastrando ? "cadastrado" : "alterado"));
 		    setResponsePage(FilmesPage.class);
