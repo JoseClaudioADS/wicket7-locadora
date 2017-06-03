@@ -1,3 +1,16 @@
 <wicket:panel>
+	<hr>
+	<form class="form-inline" wicket:id="formularioFiltro">
+		<div class="form-group">
+			<label for="nomeContem">Nome</label> <input type="text" wicket:id="nomeContem"
+				class="form-control" id="nomeContem">
+		</div>
+		<div class="form-group">
+			<label for="email">E-mail</label> <input type="text" wicket:id="email"
+				class="form-control" id="email">
+		</div>
+		<button type="button" class="btn btn-default" wicket:id="btnFiltrar">Filtrar</button>
+	</form>
+	<hr>
 	<table wicket:id="dtClientes"></table>
 </wicket:panel>
