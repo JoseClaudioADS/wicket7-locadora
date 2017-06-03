@@ -13,6 +13,7 @@ public class ValidadorCliente extends Validador {
 	validarNuloOuVazio(cliente.getEmail(), "E-mail");
 	validar();
 	validarNuloOuVazio(cliente.getEndereco(), "Endereço");
+	validar();
 	validarNuloOuVazio(cliente.getEndereco().getLogradouro(), "Logradouro");
 	validarNuloOuVazio(cliente.getEndereco().getCidade(), "Cidade");
 	validarNuloOuVazio(cliente.getEndereco().getUf(), "UF");

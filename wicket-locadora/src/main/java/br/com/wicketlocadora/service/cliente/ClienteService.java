@@ -6,10 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.wicketlocadora.persistence.domain.Cliente;
 import br.com.wicketlocadora.persistence.repository.ClienteRepository;
+import br.com.wicketlocadora.service.IService;
 import br.com.wicketlocadora.service.exception.NegocioException;
 
 @Service
-public class ClienteService {
+public class ClienteService implements IService<Cliente> {
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -21,8 +22,9 @@ public class ClienteService {
 	clienteRepository.save(cliente);
     }
 
+    @Override
     public ClienteRepository getRepository() {
-	return this.clienteRepository;
+	return clienteRepository;
     }
 
 }

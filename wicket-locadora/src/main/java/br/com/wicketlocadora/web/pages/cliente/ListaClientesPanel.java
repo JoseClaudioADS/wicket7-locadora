@@ -12,7 +12,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import br.com.wicketlocadora.persistence.domain.Cliente;
-import br.com.wicketlocadora.persistence.repository.ClienteRepository;
+import br.com.wicketlocadora.service.cliente.ClienteService;
 import br.com.wicketlocadora.web.util.LinkPanel;
 import br.com.wicketlocadora.web.util.ProviderGenerico;
 import br.com.wicketlocadora.web.util.tabela.Coluna;
@@ -23,7 +23,7 @@ public class ListaClientesPanel extends Panel {
     private static final long serialVersionUID = -1197209504623272195L;
 
     @SpringBean
-    private ClienteRepository repository;
+    private ClienteService service;
 
     public ListaClientesPanel(String id) {
 	super(id);
@@ -60,12 +60,12 @@ public class ListaClientesPanel extends Panel {
 
 	@Override
 	public Iterator<? extends Cliente> iterator(long first, long count) {
-	    return repository.findAll().iterator();
+	    return service.getRepository().findAll().iterator();
 	}
 
 	@Override
 	public long size() {
-	    return repository.count();
+	    return service.getRepository().count();
 	}
     }
 }
