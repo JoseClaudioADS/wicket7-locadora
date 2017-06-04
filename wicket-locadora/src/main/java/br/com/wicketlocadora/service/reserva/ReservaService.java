@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.wicketlocadora.persistence.domain.Reserva;
 import br.com.wicketlocadora.persistence.repository.ReservaRepository;
 import br.com.wicketlocadora.service.IService;
+import br.com.wicketlocadora.service.exception.NegocioException;
 
 @Service
 public class ReservaService implements IService<Reserva> {
@@ -15,8 +16,8 @@ public class ReservaService implements IService<Reserva> {
     private ReservaRepository reservaRepository;
 
     @Transactional
-    public void reservar() {
-
+    public void reservar(Reserva reserva) throws NegocioException {
+	System.out.println(reserva);
     }
 
     @Override
