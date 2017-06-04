@@ -1,8 +1,8 @@
 <wicket:panel>
 
 	<div class="form-group">
-		<label>Cliente</label>
-		<input type="text" wicket:id="cliente" class="form-control" size="50"/>
+		<label>Cliente</label> <input type="text" wicket:id="cliente"
+			class="form-control" size="50" />
 	</div>
 
 	<div class="row">
@@ -14,12 +14,21 @@
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
-				<label>Data Final</label> <input wicket:id="dataFinal"
-					type="text" class="form-control">
+				<label>Data Final</label> <input wicket:id="dataFinal" type="text"
+					class="form-control">
 			</div>
 		</div>
 	</div>
+	<br>
+	<div wicket:id="markupRepetidor">
+		<label>Filmes Selecionados</label>
+		<ul class="lista">
+			<li wicket:id="filmesSelecionados"><span wicket:id="titulo"></span>&nbsp;&nbsp;<a wicket:id="linkRemover" class="btn btn-danger">X</a>
+			</li>
+		</ul>
+	</div>
 
 	<hr>
-
+	<h4>Filmes</h4>
+	<div wicket:id="listaFilmesPanel"></div>
 </wicket:panel>

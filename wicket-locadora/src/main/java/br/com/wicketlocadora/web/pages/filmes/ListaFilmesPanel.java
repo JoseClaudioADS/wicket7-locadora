@@ -72,11 +72,16 @@ public class ListaFilmesPanel extends Panel {
 
 	colunas.add(new Coluna<Filme>("Título", "titulo"));
 	colunas.add(new Coluna<Filme>("Descrição", "descricao"));
+	addColunasExtras(colunas);
 
 	tabela = new Tabela<Filme>("dtFilmes", colunas, new FilmesProvider(), 20);
 	tabela.setOutputMarkupId(true);
 
 	add(tabela);
+    }
+
+    public void addColunasExtras(List<Coluna<Filme>> colunas) {
+	// não faz nada aqui
     }
 
     private void addFiltros() {

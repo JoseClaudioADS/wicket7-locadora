@@ -30,7 +30,7 @@ public class ReservarPage extends RaizPage {
 	super.onInitialize();
 	Form<ReservaDTO> formulario = new Form<ReservaDTO>("formulario", reservaModel);
 	add(formulario);
-	formulario.add(new DadosReservaPanel("painelDadosReserva"));
+	formulario.add(new DadosReservaPanel("painelDadosReserva", reservaModel));
 	formulario.add(new Button("btnReservar") {
 	    @Override
 	    public void onSubmit() {
