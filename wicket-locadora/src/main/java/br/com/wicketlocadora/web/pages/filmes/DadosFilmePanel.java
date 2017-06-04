@@ -33,6 +33,15 @@ public class DadosFilmePanel extends Panel {
 	add(new TextField<String>("titulo"));
 	add(new TextArea<String>("descricao"));
 
+	// a utilização do metodo "todasAsCategorias" funciona trocando pelo
+	// CategoriaCombobox
+	// aproveitando o cache, etc... Mas... como o wicket trabalha com
+	// instancias de objetos
+	// serializados, o seguinte erro é exibido e seu workaround não é
+	// viável...
+	// Caused by: java.io.NotSerializableException:
+	// org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor
+
 	ListMultipleChoice<Categoria> lmCategorias = new ListMultipleChoice<Categoria>("categorias",
 		categoriaRepository.findAll(new Sort("nome")), new ChoiceRenderer<Categoria>("nome", "id"));
 	add(lmCategorias);
